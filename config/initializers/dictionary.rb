@@ -1,0 +1,1 @@
+$dictionary = WordNet::Lexicon.new

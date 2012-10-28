@@ -3,3 +3,6 @@
 
 en:
   hello: "Hello world"
+  helpers:
+    links:
+      new_word: "New Word"

@@ -1,0 +1,17 @@
+// Place all the styles related to the Words controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.affix {
+  position: fixed;
+  top: 0px;
+  left: auto;
+  right: auto;
+  width: 1170px;
+}
+
+#words_pagination{
+  margin: auto;
+  text-align: center;
+}
+        

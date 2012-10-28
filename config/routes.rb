@@ -1,4 +1,6 @@
 GreWords::Application.routes.draw do
+  resources :words
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  lemma: MyString
+  definition: MyText
+  high_frequency: false
+  images: MyText
+
+two:
+  lemma: MyString
+  definition: MyText
+  high_frequency: false
+  images: MyText
