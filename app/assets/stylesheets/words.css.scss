@@ -14,4 +14,46 @@
   margin: auto;
   text-align: center;
 }
-        
+   
+
+.word-table{
+  td{
+   font-size: 120%;
+   padding: 15px 10px; 
+  }
+  .word-lemma{
+    font-weight: bolder;  
+
+    a {
+      text-decoration: none;
+    }
+  }
+}  
+
+
+.word{
+  box-shadow: 0px 0px 10px #DDD;
+  padding: 20px;
+
+  .lemma {
+    font-size: 50px;
+    margin-bottom: 20px
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .definition {
+    font-size: 18px;
+  }
+
+
+  .word-image {
+    height: 288px; 
+    width: 380px;
+    display: inline-block;
+    margin: 5px;
+  }
+
+} 

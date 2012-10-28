@@ -1,29 +1,21 @@
 - model_class = Word
-.page-header
-  %h1=t '.title', :default => model_class.model_name.human
 
-%p
-  %strong= model_class.human_attribute_name(:lemma) + ':'
-  %br
-  = @word.lemma
-%p
-  %strong= model_class.human_attribute_name(:definition) + ':'
-  %br
-  = @word.definition
-%p
-  %strong= model_class.human_attribute_name(:high_frequency) + ':'
-  %br
-  = @word.high_frequency
-%p
-  %strong= model_class.human_attribute_name(:images) + ':'
-  %br
-  = @word.images
-%p
-  %strong= model_class.human_attribute_name(:wordnet_id) + ':'
-  %br
-  = @word.wordnet_id
+.word.span9.offset1
+  
+  .page-header
+    %h1.lemma.center=t '.title', :default => @word.lemma
+    .center.definition= @word.definition
 
-.form-actions
-  = link_to t('.back', :default => t("helpers.links.back")), words_path, :class => 'btn'
-  = link_to t('.edit', :default => t("helpers.links.edit")), edit_word_path(@word), :class => 'btn'
-  = link_to t('.destroy', :default => t("helpers.links.destroy")), word_path(@word), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+  %div.center
+    - @word.images.each do |image_url|
+      %img.word-image{ src: image_url }
+
+  %div
+    %ol
+      - @word.synsets.each do |synset|
+        %li= synset.to_s
+
+  .form-actions
+    = link_to t('.back', :default => t("helpers.links.back")), words_path, :class => 'btn'
+    = link_to t('.edit', :default => t("helpers.links.edit")), edit_word_path(@word), :class => 'btn'
+    = link_to t('.destroy', :default => t("helpers.links.destroy")), word_path(@word), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

@@ -1,8 +1,10 @@
 class WordsController < ApplicationController
   # GET /words
   # GET /words.json
+  before_filter :find_word, only: [:show, :edit, :update, :destroy]
+
   def index
-    @words = Word.all.group_by{|w| w.lemma.first}
+    @words = Word.all.group_by{|w| w.lemma.first }
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,13 +12,17 @@ class WordsController < ApplicationController
     end
   end
 
+
+  def random
+    @word = Word.random
+    show
+  end
+
   # GET /words/1
   # GET /words/1.json
   def show
-    @word = Word.find(params[:id])
-
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render "show" }
       format.json { render json: @word }
     end
   end
@@ -34,7 +40,6 @@ class WordsController < ApplicationController
 
   # GET /words/1/edit
   def edit
-    @word = Word.find(params[:id])
   end
 
   # POST /words
@@ -56,8 +61,6 @@ class WordsController < ApplicationController
   # PUT /words/1
   # PUT /words/1.json
   def update
-    @word = Word.find(params[:id])
-
     respond_to do |format|
       if @word.update_attributes(params[:word])
         format.html { redirect_to @word, notice: 'Word was successfully updated.' }
@@ -72,12 +75,17 @@ class WordsController < ApplicationController
   # DELETE /words/1
   # DELETE /words/1.json
   def destroy
-    @word = Word.find(params[:id])
     @word.destroy
 
     respond_to do |format|
       format.html { redirect_to words_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def find_word
+    @word = Word.find(params[:id])
   end
 end

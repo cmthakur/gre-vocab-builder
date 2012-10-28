@@ -12,7 +12,21 @@ class Word < ActiveRecord::Base
   scope :high_frequency, where(high_frequency: true)
 
 
+  def synsets
+    @synsets ||= wordnet_word.synsets  
+  end
+
   def wordnet_word
-    WordNet::Word.find(wordid: wordnet_id)
+    @wordnet_word ||= WordNet::Word.find(wordid: wordnet_id)
+  end
+
+  def self.random
+    self.unscoped.high_frequency.first(:order => "RANDOM()")
+  end
+
+  def fetch_images
+    fetched_images = GoogleImage.search(lemma)
+    update_attributes(images: fetched_images) unless fetched_images.empty?
+  rescue
   end
 end
