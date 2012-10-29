@@ -4,7 +4,14 @@ class WordsController < ApplicationController
   before_filter :find_word, only: [:show]
 
   def index
-    @words = Word.all.group_by{|w| w.lemma.first }
+
+    words = if params[:search]
+      Word.where("lemma like ?", "%#{params[:search]}%")
+    else
+      Word.scoped
+    end
+
+    @words = words.group_by{|w| w.lemma.first }
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,13 +26,15 @@ class WordsController < ApplicationController
   end
 
   def today
-    @word = Word.of_the_day
+    @word, day_word = Word.of_the_day
     show
   end
 
   # GET /words/1
   # GET /words/1.json
   def show
+    @next_word ||= @word.next
+    @previous_word ||= @word.previous
     respond_to do |format|
       format.html { render "show" }
       format.json { render json: @word }

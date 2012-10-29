@@ -4,7 +4,7 @@
 
 .affix {
   position: fixed;
-  top: 0px;
+  top: 40px;
   left: auto;
   right: auto;
   width: 1170px;
@@ -21,6 +21,10 @@
   text-align: center;
 }
    
+.word-start-letter{
+  padding-top: 60px;
+  font-size: 35px;
+}
 
 .word-table{
   td{
@@ -44,25 +48,56 @@
 
 .word{
 
-  .lemma {
-    font-size: 50px;
-    margin-bottom: 20px
-  }
+  
 
   .center {
     text-align: center;
   }
 
-  .definition {
-    font-size: 18px;
+  .page-header{
+    border-bottom: 0px;
+
+    .lemma {
+      font-size: 75px;
+      margin-bottom: 30px;
+      margin-top: 35px;
+    }
+
+    .definition {
+      font-size: 18px;
+    }
   }
 
-
-  .word-image {
-    max-height: 288px; 
-    width: 380px;
+  .images-container{
     display: inline-block;
-    margin: 5px;
+    width: 790px;
+    vertical-align: top;
+
+    .word-image {
+      max-height: 288px; 
+      width: 380px;
+      display: inline-block;
+      margin: 5px;
+    }
+  }
+
+  .extra-definitions {
+    vertical-align: top;
+    display: inline-block;
+    width: 370px;
+    .synset {
+      font-size: 13px;
+
+      table {
+        border: 1px solid #ddd;
+        tr {
+          td:nth-child(odd) {
+            color: #888;
+            width: 70px;
+          }
+        }
+      }
+    }
   }
 
 } 

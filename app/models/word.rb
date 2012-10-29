@@ -36,12 +36,20 @@ class Word < ActiveRecord::Base
   # return the word for the current day if exists
   # else assign a new word for the day
   def self.of_the_day
-    number_for_the_day = Date.today.to_s.gsub(/\D/, "").to_i
-    word_of_the_day = DayWord.where(day: number_for_the_day).first.try(:word)
-    unless word_of_the_day
-      word_of_the_day = self.unscoped.high_frequency.includes(:day_words).where("day_words.id IS NULL").sample
-      word_of_the_day.day_words.create(day: number_for_the_day)
+    day_word_for_today = DayWord.today
+    unless day_word_for_today
+      random_word = self.unscoped.high_frequency.includes(:day_words).where("day_words.id IS NULL").sample
+      day_word_for_today = random_word.day_words.create(day: number_for_the_day)
     end
-    word_of_the_day
+    return day_word_for_today.word, day_word_for_today
+  end
+
+
+  def next
+    self.class.where("lemma > ?", lemma).first
+  end
+
+  def previous
+    self.class.where("lemma < ?", lemma).last
   end
 end

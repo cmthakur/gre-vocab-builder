@@ -1,16 +1,37 @@
-- model_class = Word
-
 .word
   
   .page-header
     %h1.lemma.center=t '.title', :default => @word.lemma
     .center.definition= @word.definition
 
-  %div.center
+  %div.extra-definitions
+    - @word.synsets.each do |synset|
+      %div.synset
+        %table.table
+          %tbody
+            %tr
+              %td= "#{synset.part_of_speech.capitalize}: "
+              %td= synset.definition
+            - synonyms = (synset.words.map(&:lemma) - [@word.lemma]).join("  -  ")
+            - unless synonyms.blank?
+              %tr
+                %td Synonyms:
+                %td= synonyms
+            - if synset.samples.present?
+              %tr
+                %td Samples:
+                %td
+                  - synset.samples.each do |sample|
+                    = "#{sample.capitalize}."
+                    %br
+
+  %div.center.images-container
     - @word.images.each do |image_url|
       %img.word-image{ src: image_url }
 
-  %div
-    %ol
-      - @word.synsets.each do |synset|
-        %li= synset.to_s
+- if @next_word
+  %a{href: word_path(@next_word)}
+    .fp_next
+- if @previous_word
+  %a{href: word_path(@previous_word) }
+    .fp_prev
