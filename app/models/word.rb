@@ -28,5 +28,6 @@ class Word < ActiveRecord::Base
     fetched_images = GoogleImage.search(lemma)
     update_attributes(images: fetched_images) unless fetched_images.empty?
   rescue
+    Rails.logger.error("Error while fething images for #{lemma}")
   end
 end

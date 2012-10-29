@@ -3,7 +3,7 @@
     =t '.title', :default => "Word List"
     = link_to t('.new', :default => t("helpers.links.new_word")), new_word_path, :class => 'btn btn-primary pull-right'
 
-.navbar.affix-top{"data-offset-top" => "50", "data-spy" => "affix"}
+.navbar.affix-top{"data-offset-top" => "130", "data-spy" => "affix"}
   #words_pagination.pagination
     %ul
       - @words.keys.each do |first_letter|
@@ -14,10 +14,8 @@
     = first_letter.capitalize
   %table.table.table-striped.word-table
     %tbody
-      - words.each do |word|
+      - words.each_with_index do |word, index|
         %tr
+          %td.span1.index= index + 1
           %td.word-lemma= link_to word.lemma, word_path(word)
           %td= word.definition
-          %td
-            - if word.high_frequency
-              %i.icon-star-empty

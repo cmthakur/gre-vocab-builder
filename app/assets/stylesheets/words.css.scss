@@ -8,6 +8,12 @@
   left: auto;
   right: auto;
   width: 1170px;
+
+  #words_pagination {
+    ul {
+      box-shadow: 0px 0px 20px #aaa;
+    }
+  }
 }
 
 #words_pagination{
@@ -28,12 +34,15 @@
       text-decoration: none;
     }
   }
+
+  .index {
+    text-align: center;
+    font-size: 12px;
+  }
 }  
 
 
 .word{
-  box-shadow: 0px 0px 10px #DDD;
-  padding: 20px;
 
   .lemma {
     font-size: 50px;
@@ -50,7 +59,7 @@
 
 
   .word-image {
-    height: 288px; 
+    max-height: 288px; 
     width: 380px;
     display: inline-block;
     margin: 5px;
