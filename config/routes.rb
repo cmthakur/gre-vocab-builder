@@ -1,5 +1,5 @@
 GreWords::Application.routes.draw do
-  resources :words do
+  resources :words, only: [:show, :index] do
     get :random, on: :collection
   end
 
