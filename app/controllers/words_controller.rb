@@ -6,7 +6,7 @@ class WordsController < ApplicationController
   def index
 
     words = if params[:search]
-      Word.where("lemma like ?", "%#{params[:search]}%")
+      Word.search(params[:search])
     else
       Word.scoped
     end

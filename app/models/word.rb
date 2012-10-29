@@ -1,5 +1,5 @@
 class Word < ActiveRecord::Base
-  attr_accessible :definition, :high_frequency, :images, :lemma, :wordnet_id
+  attr_accessible :definition, :high_frequency, :images, :lemma, :wordnet_id, :synonyms
 
   validates :lemma, uniqueness: true
   validates_presence_of :lemma, :definition, :wordnet_id
@@ -10,6 +10,7 @@ class Word < ActiveRecord::Base
 
   scope :with_images, where("images IS NOT NULL")
   scope :high_frequency, where(high_frequency: true)
+  scope :search, ->(search_term){ where("lemma like ? OR synonyms like ? OR definition like ?", "%#{search_term}%", "%#{search_term}%", "%#{search_term}%") }
 
   has_many :day_words
 
@@ -26,11 +27,15 @@ class Word < ActiveRecord::Base
     self.unscoped.high_frequency.random
   end
 
-  def fetch_images
+  def update_images
     fetched_images = GoogleImage.search(lemma)
     update_attributes(images: fetched_images) unless fetched_images.empty?
   rescue
     Rails.logger.error("Error while fething images for #{lemma}")
+  end
+
+  def update_synonyms
+    self.update_attributes(synonyms: (synsets.map{|s| s.words.map(&:lemma) }.flatten - [lemma]).join(", "))
   end
 
   # return the word for the current day if exists

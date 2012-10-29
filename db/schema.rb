@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121029042431) do
+ActiveRecord::Schema.define(:version => 20121029202820) do
 
   create_table "day_words", :force => true do |t|
     t.integer  "word_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20121029042431) do
     t.integer  "wordnet_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "synonyms"
   end
 
   add_index "words", ["lemma"], :name => "index_words_on_lemma", :unique => true
