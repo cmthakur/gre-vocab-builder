@@ -1,7 +1,6 @@
 .page-header
   %h1
     =t '.title', :default => "Word List"
-    = link_to t('.new', :default => t("helpers.links.new_word")), new_word_path, :class => 'btn btn-primary pull-right'
 
 .navbar.affix-top{"data-offset-top" => "130", "data-spy" => "affix"}
   #words_pagination.pagination
