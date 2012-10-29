@@ -11,6 +11,8 @@ class Word < ActiveRecord::Base
   scope :with_images, where("images IS NOT NULL")
   scope :high_frequency, where(high_frequency: true)
 
+  has_many :day_words
+
 
   def synsets
     @synsets ||= wordnet_word.synsets  
@@ -20,8 +22,8 @@ class Word < ActiveRecord::Base
     @wordnet_word ||= WordNet::Word.find(wordid: wordnet_id)
   end
 
-  def self.random
-    self.unscoped.high_frequency.first(:order => "RANDOM()")
+  def self.random_high_frequency
+    self.unscoped.high_frequency.random
   end
 
   def fetch_images
@@ -29,5 +31,17 @@ class Word < ActiveRecord::Base
     update_attributes(images: fetched_images) unless fetched_images.empty?
   rescue
     Rails.logger.error("Error while fething images for #{lemma}")
+  end
+
+  # return the word for the current day if exists
+  # else assign a new word for the day
+  def self.of_the_day
+    number_for_the_day = Date.today.to_s.gsub(/\D/, "").to_i
+    word_of_the_day = DayWord.where(day: number_for_the_day).first.try(:word)
+    unless word_of_the_day
+      word_of_the_day = self.unscoped.high_frequency.includes(:day_words).where("day_words.id IS NULL").sample
+      word_of_the_day.day_words.create(day: number_for_the_day)
+    end
+    word_of_the_day
   end
 end

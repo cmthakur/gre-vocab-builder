@@ -14,7 +14,12 @@ class WordsController < ApplicationController
 
 
   def random
-    @word = Word.random
+    @word = Word.random_high_frequency
+    show
+  end
+
+  def today
+    @word = Word.of_the_day
     show
   end
 

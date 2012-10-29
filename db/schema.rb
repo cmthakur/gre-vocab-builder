@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121028081452) do
+ActiveRecord::Schema.define(:version => 20121029042431) do
+
+  create_table "day_words", :force => true do |t|
+    t.integer  "word_id"
+    t.integer  "day"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "day_words", ["day"], :name => "index_day_words_on_day", :unique => true
 
   create_table "posts", :force => true do |t|
     t.string   "lemma"
