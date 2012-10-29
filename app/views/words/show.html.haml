@@ -14,8 +14,3 @@
     %ol
       - @word.synsets.each do |synset|
         %li= synset.to_s
-
-  .form-actions
-    = link_to t('.back', :default => t("helpers.links.back")), words_path, :class => 'btn'
-    = link_to t('.edit', :default => t("helpers.links.edit")), edit_word_path(@word), :class => 'btn'
-    = link_to t('.destroy', :default => t("helpers.links.destroy")), word_path(@word), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
