@@ -9,6 +9,7 @@ gem 'rails', '3.2.8'
 
 group :development do
   gem 'sqlite3'
+  gem "wordnet-defaultdb"
 end
 
 gem 'httparty'
@@ -31,7 +32,6 @@ end
 
 gem "twitter-bootstrap-rails"
 
-gem "wordnet-defaultdb"
 gem "wordnet"
 
 group :development do
