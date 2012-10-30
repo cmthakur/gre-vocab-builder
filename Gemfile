@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "1.9.3" # to specify heroku to use 1.9.3
 
 gem 'rails', '3.2.8'
 
