@@ -16,6 +16,10 @@ body > .container {
   opacity: 0.5;
 }
 
+.fp_next:hover, .fp_prev:hover {
+  opacity: 0.7;
+}
+
 .fp_next {
   background: black url(next.png) no-repeat center center;
   right: 0px;
