@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121029202820) do
+ActiveRecord::Schema.define(:version => 20121030042404) do
 
   create_table "day_words", :force => true do |t|
     t.integer  "word_id"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(:version => 20121029202820) do
     t.boolean  "high_frequency"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "encrypted_password"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "words", :force => true do |t|

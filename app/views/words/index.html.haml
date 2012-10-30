@@ -1,6 +1,6 @@
 .page-header
   %h1
-    =t '.title', :default => "High Frequency"
+    =t '.title', :default => params[:search] || "High Frequency"
 
 .navbar.affix-top{"data-offset-top" => "80", "data-spy" => "affix"}
   #words_pagination.pagination

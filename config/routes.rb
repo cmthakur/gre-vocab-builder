@@ -5,6 +5,13 @@ GreWords::Application.routes.draw do
 
   match "word_of_the_day" => "words#today" 
 
+  devise_for :users, :controllers => { :sessions => "users/sessions" }
+
+  devise_scope :user do
+    get "/sign_in", :to => "users/sessions#new"
+    post "/sign_in", :to => "users/sessions#create"
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

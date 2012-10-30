@@ -10,11 +10,7 @@
     /[if lt IE 9]
       = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
     = stylesheet_link_tag "application", :media => "all"
-    %link(href="images/apple-touch-icon-144x144.png" rel="apple-touch-icon-precomposed" sizes="144x144")
-    %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114")
-    %link(href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72")
-    %link(href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed")
-    %link(href="images/favicon.ico" rel="shortcut icon")
+    %link(href="#{asset_path("favicon.ico")}" rel="shortcut icon")
 
 
   %body
@@ -30,8 +26,18 @@
             %ul.nav
               %li= link_to "Word of the Day", word_of_the_day_path
               %li= link_to "Random", random_words_path
-            = form_tag(words_path, method: :get, class: "pull-right navbar-form") do
-              = text_field_tag "search", params[:search], placeholder: "Search"
+              %li
+                = form_tag(words_path, method: :get, class: "navbar-form") do
+                  = text_field_tag "search", params[:search], placeholder: "Search Word"
+            - if user_signed_in?
+              %ul.nav.pull-right
+                %li= link_to current_user.email, "#"
+                %li= link_to('Sign Out', destroy_user_session_path, :method => :delete)
+            - else
+              = form_tag "/sign_in", class: "pull-right navbar-form" do
+                = email_field_tag "user[email]", "", placeholder: "Email"
+                = submit_tag "Sign In", class: "btn primary"
+
 
     .container
 
