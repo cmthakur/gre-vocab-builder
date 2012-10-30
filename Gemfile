@@ -42,6 +42,10 @@ end
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
+# Heroku deploy
+gem 'pg'
+gem 'thin'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
