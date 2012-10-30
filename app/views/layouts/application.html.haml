@@ -25,6 +25,8 @@
           .container.nav-collapse
             %ul.nav
               %li= link_to "Word of the Day", word_of_the_day_path
+              - if user_signed_in?
+                %li= link_to "History", history_path
               %li= link_to "Random", random_words_path
               %li
                 = form_tag(words_path, method: :get, class: "navbar-form") do

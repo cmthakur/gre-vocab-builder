@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121030042404) do
+ActiveRecord::Schema.define(:version => 20121030055316) do
 
   create_table "day_words", :force => true do |t|
     t.integer  "word_id"
@@ -30,12 +30,25 @@ ActiveRecord::Schema.define(:version => 20121030042404) do
     t.datetime "updated_at",     :null => false
   end
 
+  create_table "user_words", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "word_id"
+    t.integer  "score"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_words", ["user_id"], :name => "index_user_words_on_user_id"
+  add_index "user_words", ["word_id"], :name => "index_user_words_on_word_id"
+
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "encrypted_password"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
   create_table "words", :force => true do |t|
     t.string   "lemma"

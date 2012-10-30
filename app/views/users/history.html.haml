@@ -1,0 +1,11 @@
+.page-header
+  %h1 Learning Tracker
+
+%table.table.table-striped
+  %tbody
+    - @user_words.each do |user_word|
+      - word = user_word.word
+      %tr
+        %td.word-lemma= link_to word.lemma, word_path(word)
+        %td= word.definition
+        %td.span2= user_word.created_at.strftime("%b %e, %l:%M %p")

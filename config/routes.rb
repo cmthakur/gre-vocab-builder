@@ -4,6 +4,7 @@ GreWords::Application.routes.draw do
   end
 
   match "word_of_the_day" => "words#today" 
+  match "history" => "users#history"
 
   devise_for :users, :controllers => { :sessions => "users/sessions" }
 

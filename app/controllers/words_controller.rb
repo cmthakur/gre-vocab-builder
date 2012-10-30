@@ -2,6 +2,7 @@ class WordsController < ApplicationController
   # GET /words
   # GET /words.json
   before_filter :find_word, only: [:show]
+  after_filter :log_word_viewed, only: [:show, :random, :today], if: -> { user_signed_in? }
 
   def index
 
@@ -46,5 +47,9 @@ class WordsController < ApplicationController
 
   def find_word
     @word = Word.find(params[:id])
+  end
+
+  def log_word_viewed
+    current_user.user_words.create(word_id: @word.id)
   end
 end

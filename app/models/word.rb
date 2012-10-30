@@ -13,6 +13,7 @@ class Word < ActiveRecord::Base
   scope :search, ->(search_term){ where("lemma like ? OR synonyms like ? OR definition like ?", "%#{search_term}%", "%#{search_term}%", "%#{search_term}%") }
 
   has_many :day_words
+  has_many :user_words
 
 
   def synsets
