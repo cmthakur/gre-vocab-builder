@@ -45,7 +45,7 @@ class Word < ActiveRecord::Base
     day_word_for_today = DayWord.today
     unless day_word_for_today
       random_word = self.unscoped.high_frequency.includes(:day_words).where("day_words.id IS NULL").sample
-      day_word_for_today = random_word.day_words.create(day: number_for_the_day)
+      day_word_for_today = random_word.day_words.create(day: DayWord.date_to_day(Date.today))
     end
     return day_word_for_today.word, day_word_for_today
   end
